@@ -1,0 +1,2 @@
+# jscript
+JavaScript samples
