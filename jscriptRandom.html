@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function getRandom(rMax) {
+    document.getElementById("RandomNum").innerHTML = Math.floor(Math.random() * rMax) ;
+}
+</script>
+</head>
+<body>
+
+<h2>Random Number 0 to 9</h2>
+
+<font size="7"><p id="RandomNum">?</p></font>
+
+<button type="button" onclick="getRandom(10)">Show me the NUMBER!!</button>
+
+</body>
+</html> 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function arrIsrt(arr, elem, before) {
+    if (!elem) return ;
+    if (before == null || before < 0 || before >= arr.length) {
+        console.log("Before: ", before, " ge len: ", arr.length) ;
+        arr.push(elem) ;
+        return ;
+    }
+    arr.splice(before, 0, elem) ;
+}
+
+function myFunction() {
+    const person1 = { tranId: "12345", tranDate: "2018-01-01", firstName: "Alvin", lastName: "Zebra", age: 40 } ;
+    const person2 = { tranId: "54321", tranDate: "2018-02-01", firstName: "Brian", lastName: "Yellow", age: 45 } ;
+    const person3 = { tranId: "abcde", tranDate: "2018-03-01", firstName: "David", lastName: "Williams", age: 55 } ;
+    let person4 = { tranId: "edcba", tranDate: "2018-04-01", firstName: "Charlie", lastName: "XRay", age: 50 } ;
+    sArr = [ person1, person2, person3 ] ;
+    dArr = sArr ;
+    arrIsrt(sArr, person4, 2 ) ;
+    rmvArr = sArr.splice(1,1) ;
+    setTimeout(() => {
+        person4 = { tranId: "gdcba", tranDate: "2018-05-01", firstName: "Chuck", lastName: "Quebec", age: 99 } ;
+        document.getElementById("objArr").innerHTML = JSON.stringify(person4);
+        }, 1000);
+    document.getElementById("demo").innerHTML = JSON.stringify(sArr);
+    document.getElementById("cloner").innerHTML = JSON.stringify(dArr);
+    document.getElementById("extra").innerHTML = JSON.stringify(rmvArr);
+    document.getElementById("objArr").innerHTML = JSON.stringify(person4);
+}
+</script>
+</head>
+<body>
+
+<h2>Demo JavaScript in Head</h2>
+
+<p id="demo">Demo</p>
+<p id="cloner">Cloner</p>
+<p id="extra">Extra</p>
+<p id="objArr">ObjArr</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+</body>
+</html> 

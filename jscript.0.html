@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myFunction() {
+    Array.prototype.insert = function(i,...rest){
+        this.splice(i,0,...rest)
+        return this
+    }
+    var a = [3,4,8,9];
+    a.insert(2,5,6,7);
+    document.getElementById("demo").innerHTML = JSON.stringify(a);
+}
+</script>
+</head>
+<body>
+
+<h2>Demo JavaScript in Head</h2>
+
+<p id="demo">A Paragraph.</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+</body>
+</html> 

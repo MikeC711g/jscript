@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myFunction() {
+    Array.prototype.Insert = function(item, before) {
+        if (!item) return;
+        if (before == null || before < 0 || before > this.length - 1) {
+            this.push(item);
+            return;
+        }
+        this.splice(before, 0,item );
+    }
+
+    const person1 = { tranId: "12345", tranDate: "2018-01-01", firstName: "Alvin", lastName: "Zebra", age: 40 } ;
+    const person2 = { tranId: "54321", tranDate: "2018-02-01", firstName: "Brian", lastName: "Yellow", age: 45 } ;
+    const person3 = { tranId: "abcde", tranDate: "2018-03-01", firstName: "David", lastName: "Williams", age: 55 } ;
+    const person4 = { tranId: "edcba", tranDate: "2018-04-01", firstName: "Charlie", lastName: "XRay", age: 50 } ;
+    sArr = [ person1, person2, person3 ] ;
+    dArr = sArr ;
+    sArr.Insert( person4, 2 ) ;
+    document.getElementById("demo").innerHTML = JSON.stringify(sArr);
+    document.getElementById("cloner").innerHTML = JSON.stringify(dArr);
+}
+</script>
+</head>
+<body>
+
+<h2>Demo JavaScript in Head</h2>
+
+<p id="demo">A Paragraph.</p>
+<p id="cloner">B Paragraph.</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+</body>
+</html> 
