@@ -1,0 +1,56 @@
+body {
+  align-items: center;
+  background-color: CadetBlue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  color: indigo;
+  font-family: Papyrus, fantasy;
+  font-size: 3rem;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+details {
+  font-family: sans-serif;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+details p {
+  padding: 20px;
+}
+
+summary {
+  background-color: indigo;
+  border: 1px solid indigo;
+  color: ghostwhite;
+  padding: 20px;
+}
+
+summary:hover {
+  background-color: lightslategray;
+  border: 1px solid lightslategray;
+}
+
+details[open] summary {
+  background-color: lightslategray;
+  border: 3px solid lightslategray;
+  color: black;
+}
+
+details[open] {
+  background: ghostwhite;
+}
+
+section {
+  max-width: 70%;
+  width: 100%;
+}

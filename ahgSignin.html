@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<head>
+  <h1>AHG NC0139 SignIn SignOut form</h1>
+</head>
+<!-- The `multiple` attribute lets users select multiple files. -->
+<input style="color:blue;" type="file" id="file-selector" accept=".csv">
+<p id="fileContents">No contents yet</p>
+<datalist id="girlNames"></datalist>
+<datalist id="parentList"></datalist>
+<datalist id="signinList"></datalist>
+<p> Event name: <input id="EventNm" type="text">
+    Description: <input id="EventDesc" type="text"></p><br>
+<p style="color: green;" id="Message">No message</p>
+<h2> Sign in a girl </h2>
+<p>  Girl to Sign In: <input list="girlNames" id="girl2Signin">  </p>
+<p>  Parent signing in: <input list="parentList" id="parentSigningIn">  </p>
+<p> <button style="background-color:green;" id="siButton" onclick="signin()">Sign In</button></p>
+<div id="newGirl" style="visibility: hidden;">
+  <p> Parent eMail: <input type="email" id="newParEMail"></p>
+  <p> Parent phone: <input type="phone" id="newParPhone"></p>
+  <p> <button style="background-color:green;" id="sniButton" onclick="signinNew()">Sign In new person</button></p>
+</div>
+<h2> Sign out a girl </h2>
+<p>  Girl to Sign Out: <input list="signinList" id="girl2Signout">  </p>
+<p>  Parent signing out: <input list="parentList" id="parentSigningOut">  </p>
+<p> <button style="background-color:blueviolet;" onclick="signout()">Sign Out</button></p>
+<p> <button style="background-color:crimson" onclick="saveData()">Save the data</button></p>
+ <a download="noName.text" id="downloadLink" style="display: none">Download</a>
+<!-- Create 2 selects, one for girl and one for parent. In csv add girls as options under that select
+  and add parents as option under that select.  Keep list of ahg keys and keep that along with info.
+  Write each signin to a JSON output and write that file at the end.  File to include line 1 with event/mtg, 
+  date, description, comments, then an array of key, girl fname, girl lname, signinParent key, spLName, spfName,
+  then signout for each girl.  Updating JSON in each case. -->
+<script>
+  const [fileSelector, outPar, girlNames, parentList, signinList] = // Grps of 5
+    getHtmlElements('file-selector', 'fileContents', 'girlNames', 'parentList', 'signinList') ;
+  const [girlSignin, parSignin, girlSignout, parSignout, msgArea] =
+    getHtmlElements('girl2Signin', 'parentSigningIn', 'girl2Signout', 'parentSigningOut', 'Message')
+  const [signinButton, newGirlDiv, newParEMail, newParPhone, eventName, eventDesc] =
+    getHtmlElements('siButton', 'newGirl', 'newParEMail', 'newParPhone', 'EventNm', 'EventDesc') ;
+  msgArea.innerText = "Must load file to start signins" ;
+  let signoutList = [] ; // For easier reference
+  fileSelector.addEventListener('change', (event) => {
+    const fileList = event.target.files;
+    curFile = fileList[0] ;
+    const fName = curFile.name ;
+    const reader = new FileReader() ;
+    reader.addEventListener('load', () => {
+        const curText = reader.result ;
+        const quotRmv = curText.replaceAll('"', '') ;
+        const rowList = quotRmv.split('\n') ;
+        let htmlStr = "" ;
+        for (let i = 1; i < rowList.length -1; i++) {
+            const rowCols = rowList[i].split(',') ;
+            if (i % 20 == 0) {  htmlStr += rowCols[2] + rowCols[1] + rowCols[12] + rowCols[13] + "<br>" ; } // log every 20th
+            optVal = [rowCols[2], rowCols[1]].join(' ') ;
+            addToList((rowCols[4] === "Y") ? girlNames : parentList, optVal, (rowCols[4] === "Y") ? true : false)
+        }
+        console.log(htmlStr) ;
+        outPar.innerHTML = htmlStr ;
+        msgArea.innerText = "File loaded, signings can begin" ;
+    });
+    reader.readAsText(curFile) ;
+    // console.log(fileList);
+  });
+
+  function signin() {
+    let addedData = "" ;    // Assuming existing
+    const girlInfo = girlSignin.value ;
+    const parInfo = parSignin.value ;
+    const fDate = new Date().toISOString() ;
+    if (isInList(girlInfo)) {
+      const sKey = [girlInfo, parInfo, fDate, "", ""].join(', ') ;
+      console.log(sKey) ;
+      addToList(signinList, sKey, true) ;   // Add girl to signed in list
+      removeFromList(girlInfo) ;      // Remove girl from girlNames list
+      msgArea.innerText = [girlInfo, "Signed in by", parInfo].join(' ') ;
+      girlSignin.value = parSignin.value = "" ;
+    } else {    // New person, not registered
+      newGirlDiv.style.visibility = "visible" ;
+      signinButton.disabled = true ;
+      msgArea.innerText = "Please provide eMail and phone for parent signing in, then press Sign in new person" ;
+    }
+  }
+
+  function signinNew() {
+    const girlInfo = girlSignin.value ;
+    const parInfo = parSignin.value ;
+    const fDate = new Date().toISOString() ;
+    const parEMail = newParEMail.value ;
+    const parPhone = newParPhone.value ;
+    const sKey = [girlInfo, parInfo, fDate, parEMail, parPhone].join(', ') ;
+    console.log(sKey) ;
+    addToList(signinList, sKey, true) ;   // Add girl to signed in list
+    msgArea.innerText = [girlInfo, "Signed in as visitor by", parInfo].join(' ') ;
+    girlSignin.value = parSignin.value = parEMail.value = parPhone.value = "" ;
+    newGirlDiv.style.visibility = "hidden" ;
+    signinButton.disabled = false ;
+  }
+
+  function signout() {
+    const siKey = girlSignout.value ;
+    const parInfo = parSignout.value ;
+    const fDate = new Date().toISOString() ;
+    const soKey = [siKey, parInfo, fDate].join(', ') ;
+    signoutList.push(soKey) ;
+    removeFromList(siKey) ;
+    msgArea.innerText = [siKey, "Signed out by", parInfo].join(' ') ;
+    girlSignout.value = parSignout.value = "" ;
+  }
+
+  function saveData() {
+    notSignedOutList = getUnsignedOut() ;   // Save anyone signed in, not yet signed out
+    let jsonOut = { EventName : eventName.value, EventDescription : eventDesc.value,
+      eventSignouts : signoutList, notSignedOut : notSignedOutList }
+    let fBlob = new Blob([JSON.stringify(jsonOut)], {type: 'text/json'}) ;
+    const fDate = new Date().toISOString() ;
+    let fName = "ahgSignout.D" + fDate  + ".json" ;
+    let downloadLink = document.createElement('a') ;
+    downloadLink.download = fName ;
+    downloadLink.innerHTML = "download file" ;
+    downloadLink.href = window.URL.createObjectURL(fBlob);
+    // downloadLink.onclick = destroyClickedElement ;
+    downloadLink.style.display = "none" ;
+    document.body.appendChild(downloadLink) ;
+    downloadLink.click() ;
+    downloadLink.remove(0) ;
+
+    console.log(signoutList) ;
+    console.log(jsonOut) ;  // Add signins in dataList not yet removed
+    console.log(JSON.stringify(jsonOut)) ;
+    msgArea.innerText = "Data has been saved." ;
+  }
+
+  function getUnsignedOut() {
+    let notSignedOutList = [] ;
+    if (signinList.options.length > 0) {
+      for (let curSignin of signinList.options) {
+        notSignedOutList.push(curSignin.value) ;
+      }
+    }
+    return notSignedOutList ;
+  }
+
+  function getHtmlElements() {
+    let returnVals = [] ;
+    for (let curArg of arguments) {
+      returnVals.push(document.getElementById(curArg)) ;
+    }
+    return [...returnVals] ;
+  }
+
+  function addToList(list2Add, optValue, keepId) {
+    let curOption = document.createElement('option') ;
+    curOption.value = optValue ;
+    if (keepId) { curOption.id = optValue ; }
+    list2Add.appendChild(curOption) ;
+  }
+
+  function removeFromList(optId) {
+    opt2Rmv = document.getElementById(optId) ;
+    opt2Rmv.remove(0) ;
+  }
+
+  function isInList(optId) {
+    return document.getElementById(optId) ;
+  }
+</script>

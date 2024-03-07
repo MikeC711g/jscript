@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function makeArr() {
+    let numArr = [1, 2, 3]
+    console.log('len preTweak: ', numArr.length)
+    tweakArr(numArr) ;
+    console.log('len postTweak: ', numArr.length)
+    document.getElementById("DateCalcs").innerHTML = numArr ;
+}
+function tweakArr(inArr) {
+    inArr.push(4)
+    inArr.push(5)
+    console.log('tweaked len: ', inArr.length)
+}
+</script>
+</head>
+<body>
+
+<h2>Playing w/arrays in javascript verifying addr change</h2>
+
+<p id="DateCalcs">DateCalcs</p>
+
+<button type="button" onclick="makeArr()">Calc Dates</button>
+
+</body>
+</html> 

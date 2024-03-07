@@ -3,13 +3,51 @@
 <head>
 <script>
 function myFunction() {
+    let curDate = '2023-04-17' ;
+    let curAcct = 'cfcu'
+    let curAmt = 789.01 
+    let curString = curDate + curAcct + curAmt.toString() ;
+    console.log('Aggregate string is %s', curString)
+    let obj1 = {}
+    obj1[curAcct] = 'Joe' ;
+    console.log('obj1: ', obj1) ;
     Array.prototype.insert = function(i,...rest){
         this.splice(i,0,...rest)
         return this
     }
     var a = [3,4,8,9];
     a.insert(2,5,6,7);
-    document.getElementById("demo").innerHTML = JSON.stringify(a);
+    aStr = a[0].toString() ;
+    document.getElementById("demo").innerHTML = JSON.stringify(a) + ' Str a[0]: ' + aStr +
+        " of len: " + aStr.length ;
+}
+function rtn4(in1, in2) {
+    product1 = in1 * in2 ;
+    sum2 = in1 + in2 ;
+    diff3 = in1 - in2 ;
+    quot4 = in1 / in2 ;
+    return [ product1, sum2, diff3, quot4 ] ;
+}
+function get4(in1, in2) {
+    let myProd = mySum = myDiff = myQuot = 0 ;
+    console.log("PreProduct: %d  Sum: %d  Diff: %d  Quotient: %d", myProd, mySum, myDiff, myQuot) ;
+    [myProd, mySum, myDiff, myQuot] = rtn4(in1, in2) ;
+    console.log("Product: %d  Sum: %d  Diff: %d  Quotient: %d", myProd, mySum, myDiff, myQuot) ;
+}
+function arrayCopies() {
+    let el1 = { Name: 'Mike', Age: 50, Coolness: 10 } ;
+    let el2 = { Name: 'Pete', Age: 60, Coolness: 10 } ;
+    let el3 = { Name: 'Joe', Age: 49, Coolness: 9 } ;
+    let el4 = { Name: 'Julian', Age: 21, Coolness: 2 } ;
+    let el5 = { Name: 'Chris', Age: 23, Coolness: 3 } ;
+    let srceEl = [ el1, el2, el3, el4 ] ;
+    let targetEq = srceEl ;
+    let targetExp = [...srceEl] ;
+    let targetClone = srceEl.slice() ;
+    console.log('Srce: ', srceEl, ' tEQ: ', targetEq, ' tExp: ', targetExp, ' tCL: ', targetClone) ;
+    srceEl.pop() ;
+    srceEl.push(el5) ;
+    console.log('2Srce: ', srceEl, ' tEQ: ', targetEq, ' tExp: ', targetExp, ' tCL: ', targetClone) ;
 }
 </script>
 </head>
@@ -20,6 +58,8 @@ function myFunction() {
 <p id="demo">A Paragraph.</p>
 
 <button type="button" onclick="myFunction()">Try it</button>
+<button type="button" onclick="get4(8, 4)">Try get4</button>
+<button type="button" onclick="arrayCopies()">ArrayCopy</button>
 
 </body>
 </html> 

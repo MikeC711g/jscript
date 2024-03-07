@@ -3,24 +3,90 @@
 <head>
 <script>
 function myFunction() {
-    Array.prototype.Insert = function(item, before) {
-        if (!item) return;
-        if (before == null || before < 0 || before > this.length - 1) {
-            this.push(item);
-            return;
+    let curDate = '2023-04-17' ;
+    let curAcct = 'cfcu'
+    let curAmt = 789.01 
+    let curString = curDate + curAcct + curAmt.toString() ;
+    console.log('Aggregate string is %s', curString)
+    let objArr = [{Pete: 1, Mike: 2, Joe: 3}, {Pete: 4, Mike: 5, Joe: 6}]
+    for (let i = 0; i < objArr.length; i++) {
+        let obj2 = objArr[i] ;
+        for (let j = 0; j < objArr.length; j++) {
+            if (obj2 == objArr[j]) { console.log('Isolated equal: %d', j) ;
+            } else {
+                console.log('Isolated not = %d', j) ;
+            }
         }
-        this.splice(before, 0,item );
+    }
+    let obj1 = {}
+    obj1[curAcct] = 'Joe' ;
+    console.log('obj1: ', obj1) ;
+    Array.prototype.insert = function(i,...rest){
+        this.splice(i,0,...rest)
+        return this
+    }
+    var a = [3,4,8,9];
+    a.insert(2,5,6,7);
+    aStr = a[0].toString() ;
+    document.getElementById("demo").innerHTML = JSON.stringify(a) + ' Str a[0]: ' + aStr +
+        " of len: " + aStr.length ;
+}
+function rtn4(in1, in2) {
+    product1 = in1 * in2 ;
+    sum2 = in1 + in2 ;
+    diff3 = in1 - in2 ;
+    quot4 = in1 / in2 ;
+    return [ product1, sum2, diff3, quot4 ] ;
+}
+function get4(in1, in2) {
+    let myProd = mySum = myDiff = myQuot = 0 ;
+    console.log("PreProduct: %d  Sum: %d  Diff: %d  Quotient: %d", myProd, mySum, myDiff, myQuot) ;
+    [myProd, mySum, myDiff, myQuot] = rtn4(in1, in2) ;
+    console.log("Product: %d  Sum: %d  Diff: %d  Quotient: %d", myProd, mySum, myDiff, myQuot) ;
+}
+function dateWrk() {        // Take number and loop thru core that many times, then same w/getting info from Dates
+    const second = 1000 ;   const  minute = 60 * second ;  const hour = 60 * minute ;
+    const day = 24 * hour ; const  year = 365 * day ;
+    let eDate ;  let dtNum ; let d = new Date() ;  let tzOffset = d.getTimezoneOffset() / 60 ; let leapDays ;
+
+    for (let i = 0; i < 10000; i++) {
+        // if (i % 100 === 0) { console.log(i) ; }
+        dtNum = Date.now() ;  let curYr = Math.trunc(dtNum / year)  ;    // 72/6/80/4/8/92/6/2000/4/8/12/16/20 = 13
+        let millis = dtNum % second ;  let seconds = Math.trunc(dtNum % minute / second) ;
+        let minutes = Math.trunc(dtNum % hour / minute) ; let hours = Math.trunc(dtNum % day / hour) ;
+        let days = Math.trunc(dtNum % year / day) ;  
+        leapDays = (curYr + 2) / 4 ;  curYr += 1970 ;
+        hours -= tzOffset ;     // Adjust for time offset
+        if (hours < 0) {
+            hours += 24 ;  days -= 1 ;
+        }
+        if (leapDays === Math.trunc(leapDays)) {        // This is leap year, so if prior to 3/1, don't use this year as leap
+            if (days < 60) {  leapDays-- ; }        // No leap day in current year yet
+        }
+        days++ ;            // Day is 0 offset, adding 1 to match julian date
+        days -= Math.trunc(leapDays) ;  // leap years took 366 days instead of 365
+        if (days < 1) {  
+            curYr-- ;  days += 365;
+        }
+        eDate = curYr.toString() + '.' + days.toString() + '-' + hours.toString() + '.' + minutes.toString() + '.' +
+            seconds.toString() + '.' + millis.toString() ;
     }
 
-    const person1 = { tranId: "12345", tranDate: "2018-01-01", firstName: "Alvin", lastName: "Zebra", age: 40 } ;
-    const person2 = { tranId: "54321", tranDate: "2018-02-01", firstName: "Brian", lastName: "Yellow", age: 45 } ;
-    const person3 = { tranId: "abcde", tranDate: "2018-03-01", firstName: "David", lastName: "Williams", age: 55 } ;
-    const person4 = { tranId: "edcba", tranDate: "2018-04-01", firstName: "Charlie", lastName: "XRay", age: 50 } ;
-    sArr = [ person1, person2, person3 ] ;
-    dArr = sArr ;
-    sArr.Insert( person4, 2 ) ;
-    document.getElementById("demo").innerHTML = JSON.stringify(sArr);
-    document.getElementById("cloner").innerHTML = JSON.stringify(dArr);
+    document.getElementById("demo").innerHTML = dtNum.toString() + '  ' + eDate + ' Leaps: ' + leapDays.toString() +
+        ' tzOff: ' + tzOffset.toString() ;
+}
+
+function dateWrk2() {
+    let dateStr ;
+    
+    for (let i = 0; i < 10000; i++) {
+        const d = new Date() ; let curMth = d.getMonth() ;  curMth++ ;
+        dateStr = d.getFullYear().toString() + '.' + curMth.toString() + '.' + d.getDate().toString() + '-' +  
+            d.getHours().toString() + '.' + d.getMinutes().toString() + '.' + d.getSeconds().toString() + '.' +
+            d.getMilliseconds().toString() ;
+    }
+
+    document.getElementById("demo").innerHTML = dateStr ;
 }
 </script>
 </head>
@@ -29,9 +95,11 @@ function myFunction() {
 <h2>Demo JavaScript in Head</h2>
 
 <p id="demo">A Paragraph.</p>
-<p id="cloner">B Paragraph.</p>
 
 <button type="button" onclick="myFunction()">Try it</button>
+<button type="button" onclick="get4(8, 4)">Try get4</button>
+<button type="button" onclick="dateWrk()">Try date work</button>
+<button type="button" onclick="dateWrk2()">Try other date work</button>
 
 </body>
 </html> 

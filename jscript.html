@@ -17,6 +17,8 @@ function myFunction() {
     const person2 = { tranId: "54321", tranDate: "2018-02-01", firstName: "Brian", lastName: "Yellow", age: 45 } ;
     const person3 = { tranId: "abcde", tranDate: "2018-03-01", firstName: "David", lastName: "Williams", age: 55 } ;
     let person4 = { tranId: "edcba", tranDate: "2018-04-01", firstName: "Charlie", lastName: "XRay", age: 50 } ;
+    const splArr1 = "xxx@@yyy".split('@@') ;
+    const splArr2 = "zzz".split('@@') ;
     sArr = [ person1, person2, person3 ] ;
     dArr = sArr ;
     arrIsrt(sArr, person4, 2 ) ;
@@ -29,6 +31,8 @@ function myFunction() {
     document.getElementById("cloner").innerHTML = JSON.stringify(dArr);
     document.getElementById("extra").innerHTML = JSON.stringify(rmvArr);
     document.getElementById("objArr").innerHTML = JSON.stringify(person4);
+    document.getElementById("splitTest1").innerHTML = JSON.stringify(splArr1);
+    document.getElementById("splitTest2").innerHTML = JSON.stringify(splArr2);
 }
 </script>
 </head>
@@ -40,6 +44,8 @@ function myFunction() {
 <p id="cloner">Cloner</p>
 <p id="extra">Extra</p>
 <p id="objArr">ObjArr</p>
+<p id="splitTest1">SplitTest1</p>
+<p id="splitTest2">SplitTest2</p>
 
 <button type="button" onclick="myFunction()">Try it</button>
 

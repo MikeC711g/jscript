@@ -1,0 +1,11 @@
+{ "taxInfo": [   
+    { "Name": "ProjectSummaryByHouseDate", "CsvName": "ProjectSummaryByHouseDate.csv",
+        "Query": "select a.house, a.startDt, a.description, sum(b.amount) from projects a, annotatedstmts b where a.projectid = b.project and a.endDt > '2020-01-01' and startDt < '2020-12-31' and trandate between '2020-01-01' and '2020-12-31' group by a.house, a.startDt, a.description ;"
+    },
+    { "Name": "RentIncomeByHouse", "CsvName": "RentIncomeByHouse.csv",
+        "Query": "select house, sum(amount) from annotatedstmts where amount > 0 and trandate between '2020-01-01' and '2020-12-31' and description = 'Rent Income' and house != '' group by house ;"
+    },
+    { "Name": "RentIncomeDetailsByHouse", "CsvName": "RentIncomeDetailsByHouse.csv",
+        "Query": "select house, trandate, amount from annotatedstmts where amount > 0 and trandate between '2020-01-01' and '2020-12-31' and description = 'Rent Income' and house != '' ;"
+    }
+]  }
