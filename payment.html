@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script src="scripts/payment.js"></script>
+    
+<h2>Loan Payment Calculator</h2>
+
+Principal:  <input type="number" id="Principal" value="0"> <br>
+Years:      <input type="number" id="Years" value="30"> <br>
+Int Rate:   <input type="number" id="Rate" value="5.5"> <br><br>
+
+<button type="button" onclick="calcPayment()">Calculate Payment</button>
+
+<p id="PaymentAmt">Payment Amount</p>
+
+<h2>Amortization Section</h2>
+Extra Pmt:  <input type="number" id="ExtraPmt" value="0">
+
+<button type="button" onclick="amortizeYear()">Amortization</button>
+
+<p id="Amortization">Amortization</p>
+
+</body>
+</html> 

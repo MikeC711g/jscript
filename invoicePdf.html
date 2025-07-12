@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="scripts/invoiceData.js" defer></script>
+    <script src="scripts/invoicePdf.js" defer></script>
+<head>
+</head>
+<body onload="loadInfo()">
+    <h2>Invoice generator PDF</h2>
+      <h3 id="coInfo"></h3>
+    <p><input type="text" size="100" id="jobName" placeholder="Job Name"></p>
+    <button type="button" onclick="showOptions()">Show Options</button>
+
+</body>
+</html> 

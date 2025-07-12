@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Crazy Generator</title>
+</head>
+<body onload="loadHtml()">
+    
+<h1>Crazy Generator</h1>
+
+<h2>Generator</h2>
+<p>Input generator guide here:</p>  
+
+<p id="bookList">Book List Select</p>
+Increments: <input type="number" id="incrVal" name="incrVal" value="3"> <br>
+Total Len:  <input type="number" id="totalLen" name="totalLen" value="6"> <br>
+Incr Fwd:   <input type="checkbox" id="bookDir" checked> <br>
+<p id="dateSel">Date Select</p>
+<p id="dogSel">Dog Select</p>
+
+<button type="button" id="submitBtn" onclick="genIt()"
+        title="Generate the crazy book name" 
+        class="btn btn-primary"
+ style="background-color: green;color: white;">Generate</button>
+<script src="scripts/pwGen.js"></script>
+
+</body>
+</html> 

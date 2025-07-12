@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<h2>JavaScript to calc what SS could have been</h2>
+
+First year: <input type="number" id ="firstYr" min="1950" max="2038"><br>
+Last year: <input type="number" id ="lastYr" min="1950" max="2038"><br>
+% SS witholding: <input type="number" id="ssWPct" value="7.65"><br>
+Interest Rate: <input type="number" id ="intRate" min="0.01" max="100.0"><br>
+Age to Start Collecting:<br>
+ <input type="radio" name="retirementAge" id="early" value="62">Early/62
+ <input type="radio" name="retirementAge" id="mid" value="66.5">Mid/66.5
+ <input type="radio" name="retirementAge" id="full" value="70">Full/70 <br>
+Year when you reach that age: <input type="number" id ="retireYear" min="2023" max="2050"><br>
+Expected monthly Amount: <input type="number" id ="mthAmt" min="1" max="8000"><br>
+For years between lastYear and retirementYear use income for withholding of:<br>
+ <input type="radio" name="retirementIncome" id="none" value="none">No income
+ <input type="radio" name="retirementIncome" id="same" value="same">Same income
+ <input type="radio" name="retirementIncome" id="cola" value="cola">Income incremented by interest rate <br>
+Include employer matching contributions:
+ <input type="checkbox" id="empMatch" name="empMatch" value="true">
+<br>
+<button type="button" onclick="createAnnualInputs()">
+    Create inputs</button>
+<button type="button" onclick="refreshValues()">Refresh Values</button>
+<button type="button" onclick="finalSummary()">Final Summary</button>
+<button type="button" onclick="initVals()">ReRead Initial values</button>
+
+<p id="inputs">Inputs for each year will be here</p>
+<p id="summary">Summary information</p>
+
+<script src="scripts/socialSecurity.js"></script>
+</body>
+</html> 

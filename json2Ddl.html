@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+<h2>Demo JavaScript read json file w/file selector</h2>
+
+<p class="content" id="demo">Paragraph anchor.</p>
+<label for="tableNm" title="Table Name">Table Name</label>
+<input type="text" size="50" id="tableNm" name="tableNm"><br>
+<label for="rowsPerDdl" title="Rows per insert">Rows per Insert</label>
+<input type="number" id="rowsPerDdl" name="rowsPerDdl" value="50"><br>
+<label for="FileSelector" title="Select a JSON file for which to create a table">
+    Select a JSON file for which to create a table</label>
+<input type="file" id="FileSelector" name="FileSelector" accept=".json">
+<br>
+
+<script src="scripts/json2Ddl.js"></script>
+</body>
+</html> 

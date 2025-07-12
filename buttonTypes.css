@@ -1,0 +1,30 @@
+[class^="btn-"] {
+    border-radius:  5px;
+    border-width: 4px;
+}
+.btn-primary{
+    background-color: blue ;
+    color: white ;
+}
+.btn-secondary {
+    background-color: gray ;
+    color: white ;
+}
+.btn-success {
+    background-color: green;
+    color: white ;
+}
+.btn-danger {
+    background-color: red ;
+    color: white ;
+}
+.btn-warning {
+    background-color: yellow;
+    color: black;
+}
+.btn-info {
+    background-color: #398AD5;
+    color: white ;
+}
+
+

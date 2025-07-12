@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script src="scripts/genMath.js"></script>
+    
+<h1>Math Problem Generator</h1>
+
+<h2>Calculator</h2>
+<p>Input a problem here:</p>  <input type="text" id="ProblemInput" value="2+2"> <br>
+<button type="submit" id="submit" onclick="calcIt()">Calculate</button>
+<p id="ProblemOutput"></p>
+
+<h2>Problem Generation</h2>
+Number of problems:  <input type="number" id="NumProbs" value="1"> <br>
+Include solutions: <input type="checkbox" id="IncludeSolutions" checked> <br>
+
+<button type="button" onclick="genProblems()">Generate Problems</button>
+
+<p id="ProblemList">List of Problems</p>
+
+</body>
+</html> 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        tr:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+    </style>
+<script src="scripts/archiveDb.js">
+</script>
+</head>
+<body>
+
+<h2>JScript features</h2>
+
+<!-- Try to open a file with the json in it for the statements.  Also
+ look into prompting for start year and end year.  Maybe get fancy and
+ can only click ... generate sql if those are done -->
+ <input type="file" #csvFile name="csvFile" id="csvFile"
+   onChange="readJson($event, account.value)" accept=".csv" />
+
+RunReports <p id="RunRpts">?</p>
+SqlFile (.read) <p id="SqlFile">?</p>
+
+<button type="button" onclick="runRpts('tax')">Run Tax Reports</button>
+<button type="button" onclick="runRpts('account')">Run Account Reports</button>
+
+</body>
+</html> 
