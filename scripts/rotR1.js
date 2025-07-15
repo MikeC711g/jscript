@@ -8,11 +8,9 @@ fileSelector.addEventListener('change', (event) => {
     const reader = new FileReader() ;
     reader.addEventListener('load', () => {
         cvtR1s(reader.result) ;
-        console.log(reader.result) ;
     }, false)
     reader.readAsText(file) ;
     // reader.readAsArrayBuffer(file)
-    console.log(fileList)
 })
 
 function cvtR1s(inText) {   // Currently no embedded <r1> and no first char in file <r1>
