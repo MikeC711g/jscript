@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script src="scripts/calcLateFees.js"></script>
+    
+<h1>Calculate late fees</h1>
+
+<h2>Calculator</h2>
+<p>StartDate:</p>  <input type="date" id="startDt" value="2025-10-01"> <br>
+<p>EndDate:</p>  <input type="date" id="endDt" value="2026-10-01"> <br>
+<p>RentDueDom:</p>  <input type="number" id="rentDueDom" value="1"> <br>
+<p>LateFee:</p>  <input type="number" id="lateFee" value="50"> <br>
+<p>GracePeriod:</p>  <input type="number" id="gracePeriod" value="5"> <br>
+<p>StartBal:</p>  <input type="number" id="startBal" value="0"> <br>
+<button type="submit" id="submit" onclick="calcLateFees()">Calculate</button>
+<p id="ProblemOutput"></p>
+
+</body>
+</html> 
