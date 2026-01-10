@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head> <title>Prayer item generator</title>
+    <style>
+        .section-hidden {
+                display: none !important;
+        }
+        .section-visible {
+                display: block; /* Or grid, flex, inline-block, etc. */
+        }
+</style>
 </head>
 <body onload="refreshIt()">
     
@@ -17,6 +25,17 @@
 <button type="button" id="submitBtn" onclick="refreshIt()"
         title="Refresh all data"   class="btn btn-primary"
         style="background-color: green;color: white;">Refresh</button>
+<button type="button" id="manageBtn" onclick="manageLists()"
+        title="Manage lists"   class="btn btn-primary"
+        style="background-color: blue;color: white;">Manage Lists</button>
+<button type="button" id="resetBtn" onclick="deleteLists()"
+        title="Delete and no longer use"   class="btn btn-primary"
+        style="background-color: red;color: white;">Delete Lists</button>
+<div id="manageLists" class="section-hidden">
+    <h2>Manage Lists</h2>
+    <p id="addUpdate"></p>
+    <p id="listAnchor"></p>
+</div>
 <script src="scripts/prayer1.js"></script>
 
 </body>
