@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///home/mjcasile/dev/git/jscript/prayer1.html",
+            "url": "file:///home/mjcasile/dev/git/jscript/jVocab.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

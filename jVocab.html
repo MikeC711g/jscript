@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head> <title>Vocabulary tester</title>
+</head>
+<body onload="refreshIt()">
+    
+<h1>Vocab Tester</h1>
+
+<h2>Question:</h2>  
+<p id="questionNum">Question</p>
+<p id="selectList">Select a vocab list to use</p>
+<p id="response">Result:</p>
+
+<button type="button" id="nextQues" onclick="setupQuestion()"
+        title="Prepare the next question"   class="btn btn-primary"
+        style="background-color: blue;color: white;">Go to next term</button>
+<button type="button" id="submitBtn" onclick="refreshIt()"
+        title="Refresh your quiz"   class="btn btn-primary"
+        style="background-color: green;color: white;">Refresh</button>
+
+<script src="scripts/jVocab.js"></script>
+
+</body>
+</html> 
