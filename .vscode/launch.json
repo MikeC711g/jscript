@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///home/mjcasile/dev/git/jscript/jVocab.html",
+            "url": "file:///C:/Users/mikec/dev/git/jscript/cre8CsvsFromJson.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
